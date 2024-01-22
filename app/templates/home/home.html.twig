@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-color-primary">
+    <div class="container barmenu">
+        <a class="navbar-brand" href="#"><img src="/img/airbnblogo.png" alt="Logo" class="img-fluid" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link active text-dark" href="#">Acceuil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">Mes logements</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">Mettre mon logement en ligne</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">Contact support</a>
+                </li>
+            </ul>
+            <div class="d-flex">
+                <button class="btn btn-light ms-3">Login</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+{% endblock %}
