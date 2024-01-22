@@ -5,5 +5,18 @@
 
 
 .barmenu {
-    background-color: #fdf1b8 !important;
+    background-color: #fcf4cfce !important;
+}
+
+.but:hover {
+    text-shadow: #0a0a0ace 0px 0px 5px;
+}
+
+.imgmenu:hover {
+    transform: scale(0.7);
+    transition: 1000ms;
+}
+
+.imgmenu {
+    transition: 1000ms;
 }
