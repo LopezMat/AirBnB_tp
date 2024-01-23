@@ -2,34 +2,89 @@
 
 {% block body %}
 
-<nav class=" barmenu navbar navbar-expand-lg navbar-dark bg-color-primary">
-    <div class="container ">
-        <a class="navbar-brand" href="#"><img src="/img/airbnblogo.png" alt="Logo" class="img-fluid imgmenu" /></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item">
-                    <a class="nav-link active text-dark but" href="#">Acceuil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark but" href="#">Mes logements</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark but" href="#">Mettre mon logement en ligne</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark but" href="#">Contact support</a>
-                </li>
-            </ul>
-            <div class="d-flex">
-                <button class="btn btn-light ms-3">Login</button>
-            </div>
+{# barre de recherche #}
+<nav>
+    <div class="bar ">
+        <div class="location">
+          <p>Location</p>
+          <select name="pays" id="pays-select">
+            <option value="">Choisir un pays</option>
+            <option value="France">France</option>
+            <option value="Germany">Allemagne</option>
+            <option value="Spain">Espagne</option>
+            <option value="United States">USA</option>
+            <option value="United Kingdom">Angleterre</option>
+            <option value="Italy">Italie</option>
+            <option value="China">Chine</option>
+            <option value="Japan">Japon</option>
+          </select>
         </div>
-    </div>
+        <div class="check-in">
+              <p>Arrivée</p>
+          <input type="date" placeholder="Add dates">
+        </div>
+        <div class="check-out">
+              <p>Départ</p>
+          <input type="date" placeholder="Add dates">
+        </div>
+        <div class="guests">
+              <p>Chambre</p>
+              <select name="chambre" id="chambre-select">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+                <span>
+                    <button>
+                        <i class="bi bi-search"></i>
+                    </button>
+                </span>
+        </div>
+      </div>
 </nav>
+
+<div class="mt-5  d-flex flex-row tags">
+    {% for type in types %}
+       <a class="d-flex flex-column m-3 mx-5 align-items-center tag" href="tag/{{type.id}}">
+        <img src="/img/logo_types/{{type.imagePath}}" alt="" class="imgIcn" />
+        <span>{{type.label}}</span>
+    </a> 
+    {% endfor %}    
+</div>
+
+
+    <div class="d-flex flex-wrap align-items-center mt-5">
+        {% for logement in logements %}
+            <div class="card d-flex flex-column align-items-between" style="width: 18rem; height: 500px;">
+                <img class="card-img-top" src="/img/{{logement.imagePath}}" alt="Card image cap">
+                <div class="card-body">
+                <h5 class="card-title">{{logement.pays}}, {{logement.ville}}</h5>
+                <p class="card-text">{{logement.description}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{logement.prix}}/nuit</li>
+                <li class="list-group-item">{{logement.couchage}}</li>
+                {% for equipement in logement.equipementId %}
+                <li class="list-group-item">{{equipement.label}}</li>
+                {% endfor %}
+                </ul>
+                <div class="card-body">
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
 
 
 {% endblock %}

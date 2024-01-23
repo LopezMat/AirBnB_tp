@@ -43,17 +43,25 @@ class AppFixtures extends Fixture
 
 
         //création de mes types de logement
-        $types = [
-            'Appartement', 'Maison', 'Villa', 'Bungalow', 'Loft', 'Chalet',
-            'Duplex', 'Studio', 'Cave', 'Camping', 'Camping-car', 'Penthouse'
+        $typesArray = [
+            'Bord de mer', 'Campagne', 'Cuisine équipé', 'Piscine', 'Cabanes', 'Ville emblématiques',
+            'Sur l\'eau', 'Lux', 'Chateau', 'Design', 'Maison troglodytes', 'Grange'
+        ];
+        //création de mes images
+        $imgType = [
+            'bord-de-mer.jpg', 'campagne.jpg', 'cuisine-equipe.jpg', 'piscine.jpg', 'Cabanes.jpg', 'ville-emblematique.jpg',
+            'sur-leau.jpg', 'lux.jpg', 'chateau.jpg', 'design.jpg', 'maison-troglodytes.jpg', 'grange.jpg'
+
         ];
 
-        foreach ($types as $key => $typ) {
+        for ($i = 0; $i < count($typesArray); $i++) {
             $type = new Type();
-            $type->setLabel($typ);
+            $type->setLabel($typesArray[$i])
+                ->setImagePath($imgType[$i]);
             $manager->persist($type);
-            $this->addReference('type' . $key, $type);
+            $this->addReference('type' . $i, $type);
         }
+
 
         //création de mes équipements
         $equipements = [
@@ -70,9 +78,14 @@ class AppFixtures extends Fixture
         }
 
         //création de mes logements
-        for ($i = 0; $i < 10; $i++) {
+        for ($j = 0; $j < 10; $j++) {
+            $image = new Images();
+            $image->setImagePath('telechargement.jpg');
+            $image->setAlt('logement');
+            $manager->persist($image);
             $logement = new Logement();
             $logement->setPrix($faker->numberBetween(100, 500))
+                ->setImagePath('telechargement.jpg')
                 ->setCouchage($faker->numberBetween(1, 5))
                 ->setTaille($faker->numberBetween(30, 100))
                 ->setDescription($faker->words(30, true))
@@ -82,18 +95,12 @@ class AppFixtures extends Fixture
                 ->setIsActive(true)
                 ->setAdresse($faker->words(10, true))
                 ->setCodePostal($faker->numberBetween(1000, 9999))
+                ->setPays($faker->country)
+                ->addImage($image)
                 ->setVille($faker->words(3, true));
             $manager->persist($logement);
         }
 
-        //création de mes images
-        for ($i = 0; $i < 10; $i++) {
-            $images = new Images();
-            $images->setImagePath('telechargement.jpg')
-                ->setLogementId($logement)
-                ->setAlt($faker->words(10, true));
-            $manager->persist($images);
-        }
 
         $manager->flush();
     }

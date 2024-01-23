@@ -53,6 +53,12 @@ class Logement
     #[ORM\Column(length: 255)]
     private ?string $Ville = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $pays = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $imagePath = null;
+
     public function __construct()
     {
         $this->equipementId = new ArrayCollection();
@@ -247,6 +253,30 @@ class Logement
     public function setVille(string $Ville): static
     {
         $this->Ville = $Ville;
+
+        return $this;
+    }
+
+    public function getPays(): ?string
+    {
+        return $this->pays;
+    }
+
+    public function setPays(string $pays): static
+    {
+        $this->pays = $pays;
+
+        return $this;
+    }
+
+    public function getImagePath(): ?string
+    {
+        return $this->imagePath;
+    }
+
+    public function setImagePath(string $imagePath): static
+    {
+        $this->imagePath = $imagePath;
 
         return $this;
     }
