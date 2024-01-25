@@ -24,8 +24,8 @@ class HomeController extends AbstractController
         $date = new \DateTime();
         return $this->render('home/home.html.twig', [
             "dateDuJour" => $date->format('y-m-d'),
-            "logements" => $this->logementRepo->findAll(),
-            "types" => $this->typeRepo->findAll(),
+            "logements" => $this->logementRepo->opti2(),
+            "types" => $this->typeRepo->opti(),
 
         ]);
     }
@@ -40,5 +40,37 @@ class HomeController extends AbstractController
     public function formRegister()
     {
         return $this->render('home/register.html.twig');
+    }
+
+    #[Route('/addLogement', name: 'addLogement', methods: ['GET', 'POST'])]
+    public function addLogement()
+    {
+        return $this->render(
+            'home/addLogement.html.twig',
+            [
+                "types" => $this->typeRepo->findAll(),
+            ]
+        );
+    }
+
+    #[Route('/mesLogements', name: 'mesLogements', methods: ['GET'])]
+    public function mesLogements()
+    {
+        return $this->render('home/mesLogements.html.twig');
+    }
+
+    #[Route('/support', name: 'support', methods: ['GET'])]
+    public function support()
+    {
+        return $this->render('home/support.html.twig');
+    }
+
+    #[Route('/detailLogement{id}', name: 'detailLogement', methods: ['GET'])]
+    public function detailLogement(int $id)
+    {
+        return $this->render('home/detailLogement.html.twig', [
+            "logements" => $this->logementRepo->opti2(),
+            "id" => $id
+        ]);
     }
 }

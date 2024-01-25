@@ -43,7 +43,6 @@ html,
 body {
     height: 100%;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-
 }
 
 
@@ -152,7 +151,7 @@ input[type="text"]:focus {
 
 .tag {
     text-decoration: none;
-
+    transition: 1000ms;
 }
 
 .tags {
@@ -185,4 +184,13 @@ input[type="text"]:focus {
 .annonce {
     width: 25%;
 
+}
+
+.card {
+    margin-left: 10px;
+    margin-bottom: 50px;
+}
+
+.cnt {
+    margin-top: 100px;
 }

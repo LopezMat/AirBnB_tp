@@ -66,8 +66,12 @@ class AppFixtures extends Fixture
         //création de mes équipements
         $equipements = [
             'TV', 'Wi-Fi', 'Air conditioning', 'Heating', 'Kitchen', 'Washing machine',
-            'Swimming pool', 'Gym', 'Parking', 'Balcony', 'Garden', 'Pet-friendly'
+            'Swimming pool', 'Gym', 'Parking', 'Balcony', 'Garden', 'Pet-friendly', 'Barbecue',
+            'Salle de sport', 'Table de pingpong', 'Jeux video', 'Salle de bain', 'Golf', 'Sauna',
+            'Climatisation', 'Cuisine equipe', 'Cuisine individuelle', 'Cuisine equipe',
         ];
+
+
 
         foreach ($equipements as $key => $equipment) {
             $equipement = new Equipement();
@@ -78,7 +82,7 @@ class AppFixtures extends Fixture
         }
 
         //création de mes logements
-        for ($j = 0; $j < 10; $j++) {
+        for ($j = 0; $j < 100; $j++) {
             $image = new Images();
             $image->setImagePath('telechargement.jpg');
             $image->setAlt('logement');
@@ -89,7 +93,7 @@ class AppFixtures extends Fixture
                 ->setCouchage($faker->numberBetween(1, 5))
                 ->setTaille($faker->numberBetween(30, 100))
                 ->setDescription($faker->words(30, true))
-                ->addEquipementId($this->getReference('equipement' . $faker->numberBetween(0, 9)))
+                //->addEquipementId($this->getReference('equipement' . $faker->numberBetween(0, 9)))
                 ->addTypeId($this->getReference('type' . $faker->numberBetween(0, 9)))
                 ->setUserId($user2)
                 ->setIsActive(true)
@@ -97,11 +101,15 @@ class AppFixtures extends Fixture
                 ->setCodePostal($faker->numberBetween(1000, 9999))
                 ->setPays($faker->country)
                 ->addImage($image)
-                ->setVille($faker->words(3, true));
+                ->setVille($faker->words(3, true))
+                ->setName($faker->words(3, true));
             $manager->persist($logement);
+
+            //boucle de relation avec les equipements
+            for ($k = 0; $k < rand(10, count($equipements) - 1); $k++) {
+                $logement->addEquipementId($this->getReference('equipement' . rand(0, count($equipements) - 1)));
+            }
         }
-
-
         $manager->flush();
     }
 }

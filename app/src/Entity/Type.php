@@ -46,6 +46,7 @@ class Type
         return $this;
     }
 
+
     /**
      * @return Collection<int, Logement>
      */

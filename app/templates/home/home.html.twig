@@ -67,19 +67,17 @@
             <div class="card d-flex flex-column align-items-between" style="width: 18rem; height: 500px;">
                 <img class="card-img-top" src="/img/{{logement.imagePath}}" alt="Card image cap">
                 <div class="card-body">
-                <h5 class="card-title">{{logement.pays}}, {{logement.ville}}</h5>
-                <p class="card-text">{{logement.description}}</p>
+                <h5 class="card-title">{{logement.name}}, {{logement.ville}}</h5>
                 </div>
                 <ul class="list-group list-group-flush">
-                <li class="list-group-item">{{logement.prix}}/nuit</li>
-                <li class="list-group-item">{{logement.couchage}}</li>
-                {% for equipement in logement.equipementId %}
-                <li class="list-group-item">{{equipement.label}}</li>
-                {% endfor %}
+                <li class="list-group-item">{{logement.prix}}€/nuit</li>
+                <li class="list-group-item">{{logement.couchage}} chambre(s)</li>
+                
+                <li class="list-group-item">{{logement.typeId[0].label}}</li>
+                
                 </ul>
                 <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+                <a href="{{path('detailLogement', {id: logement.id})}}" class="card-link">Voir l'annonce</a>
                 </div>
             </div>
         {% endfor %}
