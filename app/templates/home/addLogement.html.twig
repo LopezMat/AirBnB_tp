@@ -15,38 +15,43 @@ style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/
             <form>
 
                 <div class="form-outline mb-4">
-                <input type="number" id="form3Example1cg" class="form-control form-control-lg" name="price" />
-                <label class="form-label" for="form3Example1cg">Prix (€) / nuit</label>
+                <input type="number" id="couchage" class="form-control form-control-lg" name="couchage" />
+                <label class="form-label" for="couchage">Nombre de lits</label>
                 </div>
 
                 <div class="form-outline mb-4">
-                <input type="number" id="form3Example2cg" class="form-control form-control-lg" name="taille" />
-                <label class="form-label" for="form3Example3cg">Taille (m2)</label>
+                    <input type="number" id="prix" class="form-control form-control-lg" name="prix" />
+                    <label class="form-label" for="prix">Prix (€) / nuit</label>
                 </div>
 
                 <div class="form-outline mb-4">
-                <textarea name="desc" id="form3Example3cg" cols="30" rows="3"></textarea><br>
-                <label class="form-label" for="form3Example3cg">Description</label>
+                <input type="number" id="taille" class="form-control form-control-lg" name="taille" />
+                <label class="form-label" for="taille">Taille (m2)</label>
                 </div>
 
                 <div class="form-outline mb-4">
-                <input type="" id="form3Example4cg" class="form-control form-control-lg" name="adresse" />
-                <label class="form-label" for="form3Example4cg">Adresse</label>
+                <textarea name="desc" id="description" cols="30" rows="3" name="description"></textarea><br>
+                <label class="form-label" for="description">Description</label>
                 </div>
 
                 <div class="form-outline mb-4">
-                <input type="number" id="form3Example5cdg" class="form-control form-control-lg" name="cp"/>
-                <label class="form-label" for="form3Example4cdg">Code postal</label>
+                <input type="" id="adresse" class="form-control form-control-lg" name="adresse" />
+                <label class="form-label" for="adresse">Adresse</label>
                 </div>
 
                 <div class="form-outline mb-4">
-                    <input type="" id="form3Example6cdg" class="form-control form-control-lg" name="ville" />
-                    <label class="form-label" for="form3Example4cdg">Ville</label>
+                <input type="number" id="codePostal" class="form-control form-control-lg" name="codePostal"/>
+                <label class="form-label" for="codePostal">Code postal</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                    <input type="" id="Ville" class="form-control form-control-lg" name="Ville" />
+                    <label class="form-label" for="Ville">Ville</label>
                 </div>
                 
                 <div class="form-outline mb-4">
-                    <input type="" id="form3Example7cdg" class="form-control form-control-lg" name="pays" />
-                    <label class="form-label" for="form3Example4cdg">Pays</label>
+                    <input type="" id="pays" class="form-control form-control-lg" name="pays" />
+                    <label class="form-label" for="pays">Pays</label>
                 </div>
 
 
@@ -66,12 +71,15 @@ style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/
                             <option value="{{type.label }}">{{type.label}}</option>
                         {% endfor %}
                     </select><br>
-                    <label class="form-label mt-2" for="form3Example4cdg">Categorie</label>
+                    <label class="form-label mt-2" for="typeId">Categorie</label>
                 </div>
 
+                {% for equipement in logement.equipementId %}
+                    <input type="checkbox" id="equipement" name="equipement" value="{{equipement.id}}">
+                {% endfor %}
                 <div class="form-outline mb-4">
-                    <input type="file" id="form3Example8cdg" class="form-control form-control-lg" name="image" />
-                    <label class="form-label" for="form3Example4cdg">Image</label>
+                    <input type="file" id="imagePath" class="form-control form-control-lg" name="imagePath" />
+                    <label class="form-label" for="imagePath">Image</label>
                 </div>
 
         

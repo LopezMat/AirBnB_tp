@@ -11,14 +11,24 @@ use App\Entity\Equipement;
 use App\Entity\Reservation;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+
+    private $encoder;
+
+    public function __construct(UserPasswordHasherInterface $hasher)
+    {
+        $this->encoder = $hasher;
+    }
+
     public function load(ObjectManager $manager): void
     {
         // $product = new Product();
         // $manager->persist($product);
         $faker = Factory::create('fr_FR');
+
 
 
         //création de mes users
@@ -28,7 +38,7 @@ class AppFixtures extends Fixture
             ->setRoles(['ROLE_USER'])
             ->setNom($faker->lastName)
             ->setIsActive(true)
-            ->setPassword($faker->password)
+            ->setPassword($this->encoder->hashPassword($user, "toto"))
             ->setPrenom($faker->firstName);
         $manager->persist($user);
 
@@ -37,7 +47,7 @@ class AppFixtures extends Fixture
             ->setRoles(['ROLE_ADMIN'])
             ->setNom($faker->lastName)
             ->setIsActive(true)
-            ->setPassword($faker->password)
+            ->setPassword($this->encoder->hashPassword($user2, "admin"))
             ->setPrenom($faker->firstName);
         $manager->persist($user2);
 

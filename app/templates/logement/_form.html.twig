@@ -1,0 +1,143 @@
+    <section class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+        
+        <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+            <a href="{{ path('app_logement_index') }}">back to list</a>
+            <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                <div class="card" style="border-radius: 15px;">
+                    <div class="card-body p-5">
+                    <h2 class="text-uppercase text-center mb-5">Ajout d'un logement</h2>
+                    
+                    <form action="{{ path('new_post', { 'id': app.user.id }) }}" method="post" enctype="multipart/form-data">
+                        
+                        <div class="form-outline mb-4">
+                            <input type="string" id="name" class="form-control form-control-lg" name="name" />
+                            <label class="form-label" for="name">Nom du logement</label>
+                            </div>
+
+                        <div class="form-outline mb-4">
+                        <input type="number" id="couchage" class="form-control form-control-lg" name="couchage" />
+                        <label class="form-label" for="couchage">Nombre de lits</label>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <input type="number" id="prix" class="form-control form-control-lg" name="prix" />
+                            <label class="form-label" for="prix">Prix (€) / nuit</label>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                        <input type="number" id="taille" class="form-control form-control-lg" name="taille" />
+                        <label class="form-label" for="taille">Taille (m2)</label>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                        <textarea id="description" cols="30" rows="3" name="description"></textarea><br>
+                        <label class="form-label" for="description">Description</label>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                        <input type="" id="adresse" class="form-control form-control-lg" name="adresse" />
+                        <label class="form-label" for="adresse">Adresse</label>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                        <input type="number" id="codePostal" class="form-control form-control-lg" name="codePostal"/>
+                        <label class="form-label" for="codePostal">Code postal</label>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <input type="" id="Ville" class="form-control form-control-lg" name="Ville" />
+                            <label class="form-label" for="Ville">Ville</label>
+                        </div>
+                        
+                        <div class="form-outline mb-4">
+                            <input type="" id="pays" class="form-control form-control-lg" name="pays" />
+                            <label class="form-label" for="pays">Pays</label>
+                        </div>
+
+
+                        {# <div class="mt-5  d-flex flex-row tags">
+                            {% for type in types %}
+                            <a class="d-flex flex-column m-3 mx-5 align-items-center tag" href="tag/{{type.id}}">
+                                <img src="/img/logo_types/{{type.imagePath}}" alt="" class="imgIcn" />
+                                <span>{{type.label}}</span>
+                            </a> 
+                            {% endfor %}    
+                        </div> #}
+
+                        <div class="form-outline mb-4">
+                            <select name="type" id="type">
+                                {#boucle pour ajouter les types a mon select#}
+                                {% for type in types %}
+                                    <option value="{{type.label }}">{{type.label}}</option>
+                                {% endfor %}
+                            </select><br>
+                            <label class="form-label mt-2" for="typeId">Categorie</label>
+                        </div>
+
+                        {% for equipement in equipements %}                            
+                            <input type="checkbox" id="equipement" name="equipement" value="{{equipement.label}}">
+                            <label for="equipement">{{equipement.label}}</label><br>
+                        {% endfor %}
+                        <br>
+                        <div class="form-outline mb-4">
+                            <input type="file" id="imagePath" class="form-control form-control-lg" name="imagePath" />
+                            <label class="form-label" for="imagePath">Image</label>
+                        </div>
+
+                
+
+                        <div class="d-flex justify-content-center">
+                        <button type="submit"
+                            class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Ajouter mon logement</button>
+                        </div>
+                        <a href="{{ path('app_logement_index') }}">back to list</a>
+                    </form>
+
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{# {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }} #}
+

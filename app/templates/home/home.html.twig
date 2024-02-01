@@ -65,7 +65,7 @@
     <div class="d-flex flex-wrap align-items-center mt-5">
         {% for logement in logements %}
             <div class="card d-flex flex-column align-items-between" style="width: 18rem; height: 500px;">
-                <img class="card-img-top" src="/img/{{logement.imagePath}}" alt="Card image cap">
+                <img class="card-img-top" src="{{vich_uploader_asset(logement)}}" alt="Card image cap">
                 <div class="card-body">
                 <h5 class="card-title">{{logement.name}}, {{logement.ville}}</h5>
                 </div>

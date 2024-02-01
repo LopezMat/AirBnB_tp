@@ -12,7 +12,7 @@
             {% for logement in logements %}
             {% if logement.id == id %}
             <div class="col-md-6">
-                <img class="card-img-top mb-5 mb-md-0" src="/img/{{logement.imagePath}}" alt="{{ logement.name }}"></div>
+                <img class="card-img-top mb-5 mb-md-0" src="{{vich_uploader_asset(logement)}}" alt="{{ logement.name }}"></div>
             <div class="col-md-6">
                 <h1 class="display-5 fw-bolder">{{ logement.name }} / {{logement.typeId[0].label}}</h1>
                 <div class="fs-5 mb-5">
@@ -26,10 +26,15 @@
                     {{equipement.label}}{% if not loop.last %},{% endif %}{% endfor %}</p>
                 
                 <div class="d-flex">
+                    <a href="/reservation/{{logement.id}}">
+                        {% if is_granted('ROLE_USER') %}
                     <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                        
                         <i class="bi-cart-fill me-1"></i>
                         Réserver
                     </button>
+                    {% endif %}
+                    </a>
                 </div>{% endif %}
                 {% endfor %}
                 
@@ -49,7 +54,7 @@
             <div class="col mb-5">
                 <div class="card h-100">
                     <!-- Product image-->
-                    <img class="card-img-top" src="/img/{{logement.imagePath}}" alt="{{ logement.name }}">
+                    <img class="card-img-top" src="{{vich_uploader_asset(logement)}}" alt="{{ logement.name }}">
                     <!-- Product details-->
                     <div class="card-body p-4">
                         <div class="text-center">

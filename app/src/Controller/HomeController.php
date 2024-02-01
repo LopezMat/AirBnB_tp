@@ -2,10 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Logement;
 use App\Repository\TypeRepository;
 use App\Repository\LogementRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class HomeController extends AbstractController
 {
@@ -30,25 +34,22 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/formulairesLogin', name: 'formLogin', methods: ['GET'])]
-    public function formLogin()
-    {
-        return $this->render('home/login.html.twig');
-    }
 
-    #[Route('/formulairesInscription', name: 'formRegister', methods: ['GET'])]
-    public function formRegister()
-    {
-        return $this->render('home/register.html.twig');
-    }
+    // #[Route('/formulairesInscription', name: 'formRegister', methods: ['GET'])]
+    // public function formRegister()
+    // {
+    //     return $this->render('home/register.html.twig');
+    // }
 
-    #[Route('/addLogement', name: 'addLogement', methods: ['GET', 'POST'])]
-    public function addLogement()
+    #[Route('/addLogement/{id}', name: 'addLogement', methods: ['GET', 'POST'])]
+    public function addLogement(int $id, Request $request, ManagerRegistry $managerRegistry)
     {
+
         return $this->render(
             'home/addLogement.html.twig',
             [
                 "types" => $this->typeRepo->findAll(),
+
             ]
         );
     }
@@ -65,10 +66,20 @@ class HomeController extends AbstractController
         return $this->render('home/support.html.twig');
     }
 
-    #[Route('/detailLogement{id}', name: 'detailLogement', methods: ['GET'])]
+    #[Route('/detailLogement/{id}', name: 'detailLogement', methods: ['GET'])]
     public function detailLogement(int $id)
     {
         return $this->render('home/detailLogement.html.twig', [
+            "logements" => $this->logementRepo->opti2(),
+            "id" => $id
+        ]);
+    }
+
+    #[Route('/reservation/{id}', name: 'reservation', methods: ['GET'])]
+    public function reservation(int $id)
+    {
+
+        return $this->render('home/reservation.html.twig', [
             "logements" => $this->logementRepo->opti2(),
             "id" => $id
         ]);

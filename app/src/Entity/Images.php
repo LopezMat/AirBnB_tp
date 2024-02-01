@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ImagesRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ImagesRepository;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+#[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: ImagesRepository::class)]
 class Images
 {
@@ -22,6 +25,9 @@ class Images
 
     #[ORM\ManyToOne(inversedBy: 'images')]
     private ?Logement $logementId = null;
+
+    #[Vich\UploadableField(mapping: 'images', fileNameProperty: 'image_path')]
+    private ?File $imageFile = null;
 
     public function getId(): ?int
     {

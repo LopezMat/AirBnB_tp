@@ -32,19 +32,26 @@
                     <li class="nav-item">
                         <a class="nav-link active text-dark but" href="{{path('home')}}">Acceuil</a>
                     </li>
+                    {% if is_granted('ROLE_USER') %}
                     <li class="nav-item">
                         <a class="nav-link text-dark but" href="{{path('mesLogements')}}">Mes logements</a>
                     </li>
+                    
                     <li class="nav-item">
-                        <a class="nav-link text-dark but" href="{{path('addLogement')}}">Mettre mon logement en ligne</a>
+                        <a class="nav-link text-dark but" href="{{path('app_logement_new', {'id': app.user.id})}}">Mettre mon logement en ligne</a>
                     </li>
+                    {% endif %}
+    
                     <li class="nav-item">
                         <a class="nav-link text-dark but" href="{{path('support')}}">Contact support</a>
                     </li>
                 </ul>
+                {% if is_granted('ROLE_USER') %}<a href="{{ path('app_logout') }}"><button class="butLogin btn btn-light ms-3">Se deconnecter</button></a>
+                {% else %}
                 <div class="d-flex">
-                    <a href="{{ path('formLogin') }}"><button class="butLogin btn btn-light ms-3">S'enregistrer</button></a>
+                    <a href="{{ path('formRegister') }}"><button class="butLogin btn btn-light ms-3">S'enregistrer</button></a>
                 </div>
+                {% endif %}
             </div>
         </div>
     </nav>

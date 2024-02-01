@@ -2,12 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\LogementRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\LogementRepository;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+#[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: LogementRepository::class)]
 class Logement
 {
@@ -61,6 +64,9 @@ class Logement
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
+
+    #[Vich\UploadableField(mapping: 'images', fileNameProperty: 'imagePath')]
+    private ?File $imageFile = null;
 
     public function __construct()
     {
@@ -294,5 +300,17 @@ class Logement
         $this->name = $name;
 
         return $this;
+    }
+
+    public function setImageFile(?File $imageFile): static
+    {
+        $this->imageFile = $imageFile;
+
+        return $this;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
     }
 }
