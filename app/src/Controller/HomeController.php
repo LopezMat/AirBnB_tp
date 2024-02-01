@@ -57,7 +57,9 @@ class HomeController extends AbstractController
     #[Route('/mesLogements', name: 'mesLogements', methods: ['GET'])]
     public function mesLogements()
     {
-        return $this->render('home/mesLogements.html.twig');
+        return $this->render('home/mesLogements.html.twig', [
+            'logements' => $this->logementRepo->getLogementByUserId($this->getUser()->getId()),
+        ]);
     }
 
     #[Route('/support', name: 'support', methods: ['GET'])]

@@ -23,8 +23,28 @@ class LogementRepository extends ServiceEntityRepository
 
     public function opti2()
     {
-        return $this->createQueryBuilder('l')->leftJoin('l.images', 'i')->addSelect('i')->leftJoin('l.typeId', 't')->addSelect('t')->getQuery()->getResult();
+
+        return $this->createQueryBuilder('l')
+            ->leftJoin('l.images', 'i')
+            ->addSelect('i')
+            ->leftJoin('l.typeId', 't')
+            ->orderBy('l.id', 'desc')
+            ->addSelect('t')->getQuery()->getResult();
     }
+
+    //méthode qui renvoie les logements créer par le user connecter
+    public function getLogementByUserId($id)
+    {
+
+        return $this->createQueryBuilder('l')
+            ->leftJoin('l.userId', 'u')
+            ->addSelect('u')
+            ->orderBy('l.id', 'desc')
+            ->andWhere('u.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()->getResult();
+    }
+
 
     //    /**
     //     * @return Logement[] Returns an array of Logement objects

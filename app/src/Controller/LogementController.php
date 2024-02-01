@@ -96,8 +96,9 @@ class LogementController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_logement_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Logement $logement, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Logement $logement, EntityManagerInterface $entityManager, TypeRepository $typeRepository, EquipementRepository $equipementRepo): Response
     {
+
         $form = $this->createForm(Logement1Type::class, $logement);
         $form->handleRequest($request);
 
@@ -110,6 +111,9 @@ class LogementController extends AbstractController
         return $this->render('logement/edit.html.twig', [
             'logement' => $logement,
             'form' => $form,
+            'types' => $typeRepository->findAll(),
+            'equipements' => $equipementRepo->findAll(),
+
         ]);
     }
 
